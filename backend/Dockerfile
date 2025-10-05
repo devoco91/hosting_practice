@@ -1,34 +1,25 @@
-# syntax=docker/dockerfile:1
-ARG PYTHON_VERSION=3.12-slim
+# Dockerfile
+FROM python:3.11-slim
 
-FROM python:${PYTHON_VERSION}
-
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Install build dependencies for psycopg2, Pillow, etc.
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    gcc \
-    musl-dev \
-    libjpeg-dev \
-    zlib1g-dev \
-    libffi-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /code
+# Set working directory
 WORKDIR /code
 
-COPY requirements.txt /tmp/requirements.txt
+# Prevent Python from writing .pyc files
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-RUN set -ex && \
-    pip install --upgrade pip && \
-    pip install -r /tmp/requirements.txt && \
-    rm -rf /root/.cache/
+# Install dependencies
+COPY requirements.txt /code/
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY . /code
+# Copy the project
+COPY . /code/
 
+# Collect static files (optional but recommended)
+RUN python manage.py collectstatic --noinput
+
+# Expose port
 EXPOSE 8000
 
+# Run Gunicorn as the app process
 CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "backend.wsgi"]
