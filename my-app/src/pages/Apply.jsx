@@ -4,7 +4,7 @@ import api from '../services/api'
 import Toast from '../components/Toast'
 
 export default function Apply(){
-  useEffect(()=>{ window.scrollTo(0,0) }, [])
+  useEffect(()=>{ window.scrollTo(0,0) },[])
 
   const [focus, setFocus] = useState(false)
   const [loading, setLoading] = useState(false)
