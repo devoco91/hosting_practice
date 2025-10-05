@@ -1,0 +1,29 @@
+:root{
+--brand:#4c6fff;
+--brand-2:#7c3aed;
+}
+
+
+.hero{
+background: radial-gradient(1200px 500px at 10% 10%, rgba(124,58,237,.1), transparent),
+linear-gradient(135deg, rgba(76,111,255,.12), rgba(124,58,237,.12));
+}
+.hero .display-5{ letter-spacing:.5px; }
+.navbar-glass{ backdrop-filter: blur(10px); background: rgba(255,255,255,.75); }
+.card-hover{ transition: transform .2s ease, box-shadow .2s ease; }
+.card-hover:hover{ transform: translateY(-4px); box-shadow: 0 1rem 2rem rgba(0,0,0,.08); }
+.badge-soft{ background: rgba(76,111,255,.1); color: var(--brand); }
+
+
+.form-control:focus, .form-select:focus{ box-shadow: 0 0 0 .2rem rgba(76,111,255,.25); border-color: var(--brand); }
+.btn-gradient{ background: linear-gradient(90deg, var(--brand), var(--brand-2)); color:#fff; border:0; }
+.btn-gradient:hover{ filter: brightness(.95); color:#fff; }
+
+
+.footer{
+background: #0f172a; color: #cbd5e1; }
+.footer a{ color:#e2e8f0; text-decoration:none; }
+.footer a:hover{ color:#fff; }
+
+
+.small{ padding: 2rem 0; }
